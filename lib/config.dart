@@ -10,3 +10,5 @@ ThemeData temaP = ThemeData(
     Gastos (concepto:"Tocino", cantidad:80.52, fecha:DateTime.now()),
     Gastos (concepto:"Tomates", cantidad:73.21, fecha:DateTime.now())
   ];
+  
+  List<Map<String,dynamic>> datosBarra = [];

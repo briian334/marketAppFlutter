@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:market_app/config.dart';
+import 'package:market_app/widgets/barra_circular.dart';
 import 'package:market_app/widgets/widget_bitacora.dart';
 import 'package:market_app/widgets/widget_mediaquery.dart';
 import 'package:market_app/widgets/widget_barras.dart';
@@ -22,16 +23,23 @@ class _RunState extends State<Run> {
         ],
         title: const Text("Gastos"),
       ),
-      body: Column(
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: widget_barras(),
-          ),
-          SingleChildScrollView(
-            child: widget_bitacora(),
-          )
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              child: widget_barras(),
+            ),
+            SizedBox(
+              child: widget_bitacora(),
+              height: 200,
+              width: double.infinity,
+            ) 
+            /*SizedBox(
+              child: barra_circular(),
+            )*/
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => formadatos(),
