@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:market_app/config.dart';
+
+import '../database/gastos.dart';
 
 class widget_mediaquery extends StatefulWidget {
   widget_mediaquery({Key? key}) : super(key: key);
@@ -6,6 +9,9 @@ class widget_mediaquery extends StatefulWidget {
   @override
   State<widget_mediaquery> createState() => _widget_mediaqueryState();
 }
+
+final TextEditingController conceptControl = TextEditingController();
+final TextEditingController cantidadControl2 = TextEditingController();
 
 class _widget_mediaqueryState extends State<widget_mediaquery> {
   @override
@@ -35,12 +41,23 @@ class _widget_mediaqueryState extends State<widget_mediaquery> {
           const SizedBox(
             height: 10,
           ),
-          const ElevatedButton(onPressed: null, child: Text("Guardar"))
+           ElevatedButton(onPressed:_agregarGasto, child: const Text("Guardar"))
         ],
       ),
     );
   }
+  void _agregarGasto(){
+    Gastos gasto = Gastos(
+      cantidad: double.parse(cantidadControl2.text), 
+      concepto: conceptControl.text, 
+      fecha: DateTime.now());
+    
+    setState(() {
+      losgastos.add(gasto);
+    });
+    debugPrint(losgastos.toString());
+    Navigator.pop(context);
+  }
 }
 
-final TextEditingController conceptControl = TextEditingController();
-final TextEditingController cantidadControl2 = TextEditingController();
+

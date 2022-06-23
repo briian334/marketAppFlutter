@@ -5,6 +5,8 @@ import 'package:market_app/widgets/widget_bitacora.dart';
 import 'package:market_app/widgets/widget_mediaquery.dart';
 import 'package:market_app/widgets/widget_barras.dart';
 
+import 'database/gastos.dart';
+
 class Run extends StatefulWidget {
   const Run({Key? key}) : super(key: key);
 

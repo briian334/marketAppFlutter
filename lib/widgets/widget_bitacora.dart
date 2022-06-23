@@ -26,8 +26,8 @@ class _widget_bitacoraState extends State<widget_bitacora> {
                     onLongPress: null,
                 trailing: Wrap(
                   spacing: 10,
-                  children: [IconButton(onPressed: null, icon: const Icon(Icons.delete)),
-                             IconButton(onPressed: null, icon: const Icon(Icons.edit))],
+                  children: const [IconButton(onPressed: null, icon: Icon(Icons.delete)),
+                             IconButton(onPressed: null, icon: Icon(Icons.edit))],
                 ) 
 )
             ],
