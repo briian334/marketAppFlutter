@@ -1,8 +1,18 @@
+import 'package:flutter/widgets.dart';
 
-class Gastos{
-  final String? concepto;
-  final double? cantidad;
-  final DateTime? fecha;
+import '../config.dart';
 
-    Gastos({required this.concepto, required this.cantidad, required this.fecha});
+class Gastos with ChangeNotifier {
+  String? concepto;
+  double? cantidad;
+  DateTime? fecha;
+  Gastos({this.concepto, this.cantidad, this.fecha});
+  void agregarCompra() {
+    notifyListeners();
+  }
+
+  void remove(int indice) {
+    losgastos.removeAt(indice);
+    notifyListeners();
+  }
 }

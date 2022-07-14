@@ -1,50 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class barritas extends StatefulWidget {
-  barritas({Key? key}) : super(key: key);
+import 'package:gastos/config.dart';
+
+import '../database/semana.dart';
+
+class Barritas extends StatefulWidget {
+  const Barritas({Key? key}) : super(key: key);
 
   @override
-  State<barritas> createState() => _barritasState();
+  State<Barritas> createState() => _BarritasState();
 }
 
-class _barritasState extends State<barritas> {
-    ChartSeriesController? _chartSeriesController;
-    final List<Semana> _semana = [
-                           Semana(dia:"Lunes",cantidad:80),
-                           Semana(dia:"Martes",cantidad:75),
-                           Semana(dia:"Miercoles",cantidad:28),
-                           Semana(dia:"Jueves",cantidad:30),
-                           Semana(dia:"Viernes",cantidad:150)];
+class _BarritasState extends State<Barritas> {
+  ChartSeriesController? _chartSeriesController;
+  /*List<Semana> _semana = [
+    Semana(dia: "L", monto: 50),
+    Semana(dia: "M", monto: 60),
+    Semana(dia: "Mi", monto: 80),
+    Semana(dia: "J", monto: 120),
+    Semana(dia: "V", monto: 90)
+  ];*/
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    enviarGasto.addListener(() {
+      setState(() {});
+    });
+    eliminarGasto.addListener(() {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      minimum: const EdgeInsets.all(15.0),
-      child: SfCartesianChart(
-        isTransposed: true,
-        title: ChartTitle(text: "Cálculo de gastos semanal"),
-        legend: Legend(
-          isVisible: true),
-        tooltipBehavior: TooltipBehavior(
-          enable: true,
-          decimalPlaces: 5),
-          series: <ChartSeries<Semana,String>>[
-            BarSeries<Semana,String>(
-              name: "Los gastitos",
-              dataLabelSettings: DataLabelSettings(
-                isVisible: true),
-            onRendererCreated: ((controller) => _chartSeriesController),
-            dataSource: _semana, 
-            xValueMapper: (Semana,_)=>Semana.dia, 
-            yValueMapper: (Semana,_)=>Semana.cantidad
-            )
+        minimum: const EdgeInsets.all(5),
+        child: SfCartesianChart(
+          isTransposed: true, //pone las barras en vertical
+          primaryXAxis: CategoryAxis(),
+          //titulo
+          title: ChartTitle(text: "Presupuesto Semanal"),
+          legend: Legend(isVisible: true),
+          tooltipBehavior: TooltipBehavior(decimalPlaces: 2, enable: true),
+          series: <ChartSeries<Semana, String>>[
+            BarSeries<Semana, String>(
+                name: "Gastos",
+                dataLabelSettings: const DataLabelSettings(
+                    color: Color.fromARGB(255, 151, 39, 243), isVisible: true),
+                onRendererCreated: (controller) => _chartSeriesController,
+                dataSource: semana,
+                xValueMapper: (semana, _) => semana.dia,
+                yValueMapper: (semana, _) => semana.monto),
           ],
-        primaryXAxis: CategoryAxis(),
-      ));
+        ));
   }
-}
-class Semana{
-  Semana({this.dia, this.cantidad}); //cconstructor de la clase Semana
-  final String? dia;
-  final double? cantidad;
 }
